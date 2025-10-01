@@ -5,6 +5,26 @@ import ManageCategoriesModal from '../components/ManageCategoriesModal';
 import Spinner from '../components/Spinner';
 import useCurrency from '../hooks/useCurrency';
 
+const handleExportCSV = async () => {
+  try {
+    const res = await api.get('/transactions/export', {
+      responseType: 'blob', // Important for file download
+    });
+    const blob = new Blob([res.data], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'paisable_transactions.csv';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Failed to export CSV", error);
+    alert("Failed to export CSV. Please try again.");
+  }
+};
+
 const TransactionsPage = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +32,7 @@ const TransactionsPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [editingTransaction, setEditingTransaction] = useState(null);
   const [categories, setCategories] = useState([]);
-  
+
   const [isTransactionModalOpen, setIsTransactionModalOpen] = useState(false);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const { currency } = useCurrency();
@@ -47,7 +67,7 @@ const TransactionsPage = () => {
     setIsTransactionModalOpen(false);
     setEditingTransaction(null);
   };
-  
+
   const handleFormSubmit = async (formData, id) => {
     try {
       if (id) await api.put(`/transactions/${id}`, formData);
@@ -69,7 +89,7 @@ const TransactionsPage = () => {
       }
     }
   };
-  
+
   const handleNewCategory = (newCategory) => {
     setCategories(prev => [...prev, newCategory].sort());
   };
@@ -78,7 +98,7 @@ const TransactionsPage = () => {
     if (window.confirm(`Are you sure you want to delete the category "${categoryToDelete}"? All associated transactions will be moved to "Miscellaneous".`)) {
       try {
         await api.delete('/transactions/category', { data: { categoryToDelete } });
-        fetchData(); 
+        fetchData();
       } catch (error) {
         console.error("Failed to delete category", error);
       }
@@ -96,13 +116,20 @@ const TransactionsPage = () => {
           <button onClick={() => handleOpenTransactionModal()} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
             Add Transaction
           </button>
+          <button
+            onClick={handleExportCSV}
+            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+            title="Export all transactions to CSV"
+          >
+            Export to CSV
+          </button>
         </div>
       </div>
 
       {loading ? (
-  <Spinner />
-) : (
-  <div className="bg-white shadow rounded-lg overflow-x-auto">
+        <Spinner />
+      ) : (
+        <div className="bg-white shadow rounded-lg overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -120,9 +147,9 @@ const TransactionsPage = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{tx.category}</td>
                   <td className={`px-6 py-4 whitespace-nowrap font-semibold ${tx.isIncome ? 'text-green-600' : 'text-red-600'}`}>
                     {tx.isIncome ? '+' : '-'}{new Intl.NumberFormat('en-US', {
-                  style: 'currency',
-                  currency: currency.code,
-                }).format(tx.cost)}
+                      style: 'currency',
+                      currency: currency.code,
+                    }).format(tx.cost)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">{new Date(tx.addedOn).toLocaleDateString()}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -135,7 +162,7 @@ const TransactionsPage = () => {
           </table>
         </div>
       )}
-      
+
       <div className="flex justify-between items-center mt-4">
         <button onClick={() => setPage(p => Math.max(p - 1, 1))} disabled={page === 1} className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50">
           Previous
@@ -146,7 +173,7 @@ const TransactionsPage = () => {
         </button>
       </div>
 
-      <TransactionModal 
+      <TransactionModal
         isOpen={isTransactionModalOpen}
         onClose={handleCloseTransactionModal}
         onSubmit={handleFormSubmit}
@@ -154,8 +181,8 @@ const TransactionsPage = () => {
         categories={categories}
         onNewCategory={handleNewCategory}
       />
-      
-      <ManageCategoriesModal 
+
+      <ManageCategoriesModal
         isOpen={isCategoryModalOpen}
         onClose={() => setIsCategoryModalOpen(false)}
         allCategories={categories}
@@ -165,4 +192,4 @@ const TransactionsPage = () => {
   );
 };
 
-export default TransactionsPage;
+export {TransactionsPage,handleExportCSV};

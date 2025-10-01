@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import PasswordInput from '../components/PasswordInput';
 
-// Demo user credentials
+/* // Demo user credentials
 const DEMO_EMAIL = 'test@example.com';
-const DEMO_PASSWORD = 'password123';
+const DEMO_PASSWORD = 'password123'; */
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -17,10 +17,10 @@ export default function LoginPage() {
     login(email, password);
   };
 
-  const handleFillDemoCredentials = () => {
+  /* const handleFillDemoCredentials = () => {
     setEmail(DEMO_EMAIL);
     setPassword(DEMO_PASSWORD);
-  };
+  }; */
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 px-4">
@@ -42,13 +42,13 @@ export default function LoginPage() {
             </div>
             <div className="flex flex-col gap-4 mt-4">
               <button type="submit" className="w-full px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">Login</button>
-              <button 
+              {/*<button 
                 type="button" 
                 onClick={handleFillDemoCredentials} 
                 className="w-full px-6 py-2 text-blue-600 dark:text-blue-400 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600"
               >
                 Fill Demo Credentials
-              </button>
+              </button>*/}
             </div>
             <div className="mt-6 text-gray-600 dark:text-gray-400">
               Don't have an account? <Link to="/register" className="text-blue-600 hover:underline ml-2">Register</Link>

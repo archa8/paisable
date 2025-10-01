@@ -8,25 +8,29 @@ const connectDB = require('./config/db');
 dotenv.config();
 
 // Connect to database
-connectDB();
+if (process.env.NODE_ENV !== 'test') {
+	connectDB();
+}
 
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://paisable.netlify.app"
+	'http://localhost:5173',
+	'https://paisable.netlify.app',
 ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
-}));
+app.use(
+	cors({
+		origin: function (origin, callback) {
+			if (!origin || allowedOrigins.includes(origin)) {
+				callback(null, true);
+			} else {
+				callback(new Error('Not allowed by CORS'));
+			}
+		},
+		credentials: true,
+	})
+);
 app.use(express.json());
 
 // Routes
@@ -38,11 +42,13 @@ app.use('/api/receipts', require('./routes/receiptRoutes'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get('/', (req, res) => {
-  res.send('API is Running');
+	res.send('API is Running');
 });
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+const server = app.listen(PORT, () =>
+	console.log(`Server started on port ${PORT}`)
+);
 
 module.exports = { app, server };

@@ -6,6 +6,7 @@ import TransactionModal from '../components/TransactionModal';
 import useCurrency from '../hooks/useCurrency';
 import useTheme from '../hooks/useTheme';
 import Spinner from '../components/Spinner';
+import toast from 'react-hot-toast';
 
 // A reusable card component for the dashboard summary
 const SummaryCard = ({ title, value, bgColor, loading }) => {
@@ -54,7 +55,7 @@ const DashboardPage = () => {
       setCategories(categoriesRes.data);
       setRecentTransactions(summaryRes.data.recentTransactions || []);
     } catch (error) {
-      console.error("Failed to fetch dashboard data", error);
+      toast.error("Failed to fetch dashboard data");
     } finally {
       setLoading(false);
     }
@@ -73,7 +74,7 @@ const DashboardPage = () => {
       fetchData();
       handleCloseModal();
     } catch (error) {
-      console.error("Failed to save transaction", error);
+      toast.error("Failed to save transaction");
     }
   };
 

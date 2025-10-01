@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
+import toast from 'react-hot-toast';
 
 const ReceiptsPage = () => {
   const [file, setFile] = useState(null);
@@ -38,7 +39,7 @@ const ReceiptsPage = () => {
       navigate('/dashboard');
     } catch (err) {
       setError('Upload failed. Please try again.');
-      console.error(err);
+      toast.error('Upload failed. Please try again.');
     } finally {
       setUploading(false);
     }

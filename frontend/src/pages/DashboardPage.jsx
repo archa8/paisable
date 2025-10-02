@@ -105,7 +105,7 @@ const DashboardPage = () => {
           {loading ? <Spinner /> : chartData?.expensesByCategory.length > 0 ? (
     <CategoryPieChart data={chartData.expensesByCategory} theme={theme} />
   ) : (
-    <div className="h-full flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded"><p className="text-gray-500 dark:text-gray-400">No expense data to display.</p></div>
+    <div className="h-80 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded"><p className="text-gray-500 dark:text-gray-400">No expense data to display.</p></div>
   )}
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">

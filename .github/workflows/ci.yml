@@ -31,16 +31,16 @@ jobs:
           cd backend
           npm install 
           npm run dev || exit 1 &
-          sleep 6
-          curl http://localhost:5000 || exit 1
+          sleep 15
+          curl -f http://localhost:5000 || exit 1
           pkill -f "node"
       - name: Install Frontend & Run
         run: |
           cd frontend
           npm install 
           npm run dev || exit 1 &
-          sleep 6
-          curl http://localhost:5173 || exit 1
+          sleep 15
+          curl -f http://localhost:5173 || exit 1
           pkill -f "node"
       
           

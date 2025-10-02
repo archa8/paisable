@@ -31,36 +31,74 @@ export default function WelcomePage() {
     <div className="bg-gray-50 dark:bg-gray-900 min-h-screen font-montserrat text-gray-800 dark:text-gray-200">
       {/* Header */}
       <header className="py-4 px-8 flex justify-between items-center bg-white dark:bg-gray-800 shadow-md">
-        <Link to="/" className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+        <Link
+          to="/"
+          className="text-2xl font-bold text-blue-600 dark:text-blue-400"
+        >
           Paisable
         </Link>
         <div className="flex items-center gap-4">
+          <Link
+            to="/contact"
+            className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-semibold"
+          >
+            Contact Us
+          </Link>
+
+          <Link
+            to="/login"
+            className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-semibold"
+          >
+            Login
+          </Link>
+          <Link
+            to="/register"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700"
+          >
+            Sign Up
+          </Link>
           <ThemeToggle />
-          <Link to="/login" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-semibold">Login</Link>
-          <Link to="/register" className="bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700">Sign Up</Link>
         </div>
       </header>
 
       {/* Hero Section */}
       <main className="text-center py-20 px-4">
-        <h2 className="text-5xl font-bold text-gray-900 dark:text-white">Take Control of Your Finances</h2>
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">The simple, smart, and secure way to manage your income and expenses, visualize your spending, and achieve your financial goals.</p>
-        <Link to="/register" className="mt-8 inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-blue-700">Get Started for Free</Link>
+        <h2 className="text-5xl font-bold text-gray-900 dark:text-white">
+          Take Control of Your Finances
+        </h2>
+        <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          The simple, smart, and secure way to manage your income and expenses,
+          visualize your spending, and achieve your financial goals.
+        </p>
+        <Link
+          to="/register"
+          className="mt-8 inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-blue-700"
+        >
+          Get Started for Free
+        </Link>
       </main>
 
       {/* Features Section */}
       <section className="py-20 bg-gray-100 dark:bg-gray-800/50">
         <div className="max-w-7xl mx-auto px-4">
-          <h3 className="text-center text-3xl font-bold text-gray-900 dark:text-white mb-12">All The Tools You Need</h3>
+          <h3 className="text-center text-3xl font-bold text-gray-900 dark:text-white mb-12">
+            All The Tools You Need
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <FeatureCard icon={<ChartIcon />} title="Visualize Your Spending">
-              See where your money goes with intuitive charts and graphs. Understand your habits and make smarter financial decisions.
+              See where your money goes with intuitive charts and graphs.
+              Understand your habits and make smarter financial decisions.
             </FeatureCard>
-            <FeatureCard icon={<ReceiptIcon />} title="Effortless Receipt Scanning">
-              Simply upload a photo of your receipt, and let our smart OCR technology extract the details for you.
+            <FeatureCard
+              icon={<ReceiptIcon />}
+              title="Effortless Receipt Scanning"
+            >
+              Simply upload a photo of your receipt, and let our smart OCR
+              technology extract the details for you.
             </FeatureCard>
             <FeatureCard icon={<CategoryIcon />} title="Smart Categorization">
-              Organize your transactions with customizable categories to track spending across different areas of your life.
+              Organize your transactions with customizable categories to track
+              spending across different areas of your life.
             </FeatureCard>
           </div>
         </div>

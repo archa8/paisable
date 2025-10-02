@@ -1,13 +1,14 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import DashboardPage from './pages/DashboardPage';
-import {TransactionsPage} from './pages/TransactionsPage';
-import ReceiptsPage from './pages/ReceiptsPage';
-import WelcomePage from './pages/WelcomePage';
-import ProtectedRoute from './components/ProtectedRoute';
-import Layout from './components/Layout';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import DashboardPage from "./pages/DashboardPage";
+import { TransactionsPage } from "./pages/TransactionsPage";
+import ReceiptsPage from "./pages/ReceiptsPage";
+import WelcomePage from "./pages/WelcomePage";
+import ContactUs from "./pages/ContactUS"; // Import the ContactUs component
+import ProtectedRoute from "./components/ProtectedRoute";
+import Layout from "./components/Layout";
 
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
       <Route path="/" element={<WelcomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-
+      <Route path="/contact" element={<ContactUs />} />{" "}
+      {/* Add Contact Us route */}
       {/* Protected Routes Wrapper */}
-      <Route 
+      <Route
         element={
           <ProtectedRoute>
             <Layout />

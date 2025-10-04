@@ -111,6 +111,18 @@ PORT=5000
 MONGO_URI=your-mongodb-atlas-uri
 JWT_SECRET=your-secret-key
 GEMINI_API_KEY=your-gemini-api-key
+
+
+for welcome email setup:
+SENDGRID_API_KEY=SG.your-sendgrid-api-key
+EMAIL_FROM="Paisable <no-reply@paisable.com>"
+
+EMAIL_USER=your@gmail.com
+EMAIL_PASS=your-app-password
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+EMAIL_FROM="Paisable <no-reply@paisable.com>"
 ```
 
 Start the backend:

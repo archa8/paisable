@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { sendWelcomeEmail } = require('../utils/sendEmail');
 
 // Function to generate JWT
 const generateToken = (id) => {
@@ -37,6 +38,13 @@ const signup = async (req, res) => {
         email: user.email,
         token: generateToken(user._id),
       });
+
+      // sends welcome email
+      sendWelcomeEmail(user.email, user.name || '')
+        .then(() => console.log('Welcome email sent to', user.email))
+        .catch(err => console.error('Welcome email failed for', user.email, err && err.message));
+
+
     } else {
       res.status(400).json({ message: 'Invalid user data' });
     }

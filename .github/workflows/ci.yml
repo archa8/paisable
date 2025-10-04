@@ -1,0 +1,49 @@
+name: Paisable CI
+on: [push,pull_request]
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:6 
+        ports:
+          - 27017:27017 
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    env: 
+      PORT: 5000
+      MONGO_URI: mongodb://mongo:27017/testdb
+      JWT_SECRET: your-secret-key
+      GEMINI_API_KEY: your-gemini-api-key
+      VITE_API_URL: http://localhost:5000/api
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+        with:
+          path: .
+      - name: Setup Node
+        uses: actions/setup-node@v5.0.0
+      - name: Install Backend & Run
+        run: |
+          cd backend
+          npm install 
+          npm run dev || exit 1 &
+          sleep 15
+          curl -f http://localhost:5000 || exit 1
+          pkill -f "node"
+      - name: Install Frontend & Run
+        run: |
+          cd frontend
+          npm install 
+          npm run dev || exit 1 &
+          sleep 15
+          curl -f http://localhost:5173 || exit 1
+          pkill -f "node"
+      
+          
+      
+      
+    

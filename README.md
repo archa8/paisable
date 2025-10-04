@@ -9,6 +9,7 @@ Paisable is a **full-stack personal finance management app** built with **React 
 * **Analytics & Charts** – Visual breakdown by category, income/expense trends
 * **Receipt Management** – Upload receipts and automatically extract expense details using **Google Gemini OCR**
 * **Full-Stack Deployment Ready** – Backend on **Render**, frontend on **Netlify**
+* **Account Settings** – View your profile and delete your account permanently from the app.
 
 ## Deployment Links
 
@@ -55,7 +56,8 @@ Paisable is a **full-stack personal finance management app** built with **React 
 │ ├── routes/
 │ │ ├── authRoutes.js
 │ │ ├── transactionRoutes.js
-│ │ └── receiptRoutes.js
+│ │ ├── receiptRoutes.js
+| | └── userRoutes.js
 │ ├── middleware/
 │ ├── controllers/
 │ ├── models/
@@ -176,6 +178,9 @@ You can:
 ### Receipts
 
 * `POST /api/receipts/upload` → Upload receipt, trigger Gemini OCR, and create a transaction in one step
+
+### Users
+* `DELETE /api/users/account` → Delete the authenticated user account permanently
 
 ## Deployment
 

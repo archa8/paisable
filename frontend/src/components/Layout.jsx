@@ -36,6 +36,9 @@ const Layout = () => {
                   <NavLink to="/receipts" className={getNavLinkClass}>
                     Receipts
                   </NavLink>
+                  <NavLink to="/settings" className={getNavLinkClass}>
+                    Settings
+                  </NavLink>
                 </div>
               </div>
             </div>

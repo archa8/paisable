@@ -239,3 +239,18 @@ paths:
           description: Receipt processed and transaction created successfully
         "500":
           description: Error processing with AI
+
+  # --- User Routes ---
+  /users/account:
+    delete:
+      summary: Delete the authenticated user account
+      tags: [Auth]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Account deleted successfully
+        "401":
+          description: Unauthorized
+        "500":
+          description: Server error 

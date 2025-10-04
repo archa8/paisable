@@ -9,13 +9,49 @@ const ReceiptIcon = () => <svg className="h-12 w-12 text-green-500" fill="none" 
 
 const CategoryIcon = () => <svg className="h-12 w-12 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 8v5z" /></svg>;
 
-const FeatureCard = ({ icon, title, children }) => (
-  <div className="p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg flex flex-col items-center text-center">
-    {icon}
-    <h3 className="mt-4 text-xl font-bold text-gray-900 dark:text-white">{title}</h3>
-    <p className="mt-2 text-gray-600 dark:text-gray-400">{children}</p>
-  </div>
-);
+const FeatureCard = ({ icon, title, children }) => {
+  return (
+    <div
+      className="relative group cursor-pointer"
+    >
+      {/* Glow effect on hover */}
+      <div
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 
+                   blur-xl bg-gradient-to-r from-sky-400/40 via-purple-400/40 to-pink-400/40 
+                   transition-opacity duration-500"
+      />
+
+      {/* Actual Card */}
+      <div
+        className="relative p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md 
+                   hover:shadow-2xl transition-all duration-300 
+                   transform group-hover:-translate-y-2 border 
+                   border-gray-200 dark:border-gray-700"
+      >
+        {/* Icon */}
+        <div className="flex items-center justify-center w-16 h-16 rounded-xl 
+                        bg-sky-100 dark:bg-sky-900 mb-6 transition-colors duration-300
+                        group-hover:bg-sky-200 dark:group-hover:bg-sky-800">
+          <span className="text-sky-600 dark:text-sky-400 text-3xl">
+            {icon}
+          </span>
+        </div>
+
+        {/* Title */}
+        <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 
+                       group-hover:text-sky-600 dark:group-hover:text-sky-400 
+                       transition-colors duration-300">
+          {title}
+        </h4>
+
+        {/* Description */}
+        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+          {children}
+        </p>
+      </div>
+    </div>
+  );
+};
 
 export default function WelcomePage() {
   const { user } = useAuth();
@@ -103,6 +139,32 @@ export default function WelcomePage() {
           </div>
         </div>
       </section>
+<section className="py-20 bg-gray-100 dark:bg-gray-800/50">
+  <div className="max-w-7xl mx-auto px-4">
+    {/* Heading */}
+    <h3 className="text-center text-3xl font-bold text-gray-900 dark:text-white mb-16">
+      All The Tools You Need
+    </h3>
+
+    {/* Features Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <FeatureCard icon={<ChartIcon />} title="Visualize Your Spending">
+        See where your money goes with intuitive charts and graphs. 
+        Understand your habits and make smarter financial decisions.
+      </FeatureCard>
+
+      <FeatureCard icon={<ReceiptIcon />} title="Effortless Receipt Scanning">
+        Simply upload a photo of your receipt, and let our smart OCR technology 
+        extract the details for you.
+      </FeatureCard>
+
+      <FeatureCard icon={<CategoryIcon />} title="Smart Categorization">
+        Organize your transactions with customizable categories 
+        to track spending across different areas of your life.
+      </FeatureCard>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="py-8 text-center text-gray-500 dark:text-gray-400">

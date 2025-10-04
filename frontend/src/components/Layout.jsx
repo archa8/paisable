@@ -22,7 +22,10 @@ const Layout = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               {/* 2. Wrap the span in a Link to the dashboard */}
-              <Link to="/dashboard" className="font-bold text-xl text-blue-600 dark:text-blue-400">
+              <Link
+                to="/dashboard"
+                className="font-bold text-xl text-blue-600 dark:text-blue-400"
+              >
                 Paisable
               </Link>
               <div className="hidden md:block">
@@ -38,6 +41,12 @@ const Layout = () => {
                   </NavLink>
                   <NavLink to="/settings" className={getNavLinkClass}>
                     Settings
+                  </NavLink>
+                  <NavLink
+                    to="/recurring-transactions"
+                    className={getNavLinkClass}
+                  >
+                    Recurring Transactions
                   </NavLink>
                 </div>
               </div>

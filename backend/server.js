@@ -3,6 +3,8 @@ const path = require('path');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const cron = require("node-cron");
+const axios = require("axios");
 
 // Load environment variables
 dotenv.config();
@@ -45,5 +47,14 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+cron.schedule("*/10 * * * *", async () => {
+  try {
+    await axios.get("https://paisable.onrender.com");
+    console.log("Keep-alive ping sent ✅");
+  } catch (error) {
+    console.error("Keep-alive failed ❌", error.message);
+  }
+});
 
 module.exports = { app, server };
